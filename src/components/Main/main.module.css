@@ -1,0 +1,170 @@
+main {
+    margin-bottom: 110px;
+}
+
+.topPost {
+    height: 397px;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.topPost .image img {
+    max-width: 582px;
+    height: 397px;
+}
+.topPost .image {
+    max-width: 582px;
+    float: left
+}
+
+.topContent {
+    width: 464px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-top: 8px;
+}
+
+footer {
+    padding-bottom: 38px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+    align-items: center;
+    color:#8C8C8C;
+}
+
+footer .photoSmall {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.topPost .text {
+    font-size: 16px;
+    line-height: 26px;
+    color: #8C8C8C;
+}
+.topContent header h2 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+}
+
+.tag {
+    color: #8C8C8C;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+footer .eye {
+    width: 20px;
+    height: 14px;
+    vertical-align: middle;
+}
+footer .views {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+footer .eyeCenter {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 40%;
+    right: 11px;
+}
+
+footer .eyeContainer {
+    width: 24px;
+    position: relative;
+}
+.post {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    height: 260px;
+    flex-wrap: wrap;
+}
+
+.post .content {
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    width: 680px;
+}
+
+.post .image img {
+    max-width: 367px;
+    height: 260px;
+}
+.post .image {
+    max-width: 367px;
+}
+
+.popularArticlesMap {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+}
+
+.post .text {
+    font-size: 16px;
+    color: #8C8C8C;
+    height: 72px;
+}
+
+.post footer {
+    padding-bottom: 0px!important;
+    margin-top: 25px;
+}
+
+.post header h2{
+display: inline-block;
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 700;
+
+}
+.popularArticles {
+    margin-top: 91px;
+}
+
+.popularArticles header {
+    margin-bottom: 56px;
+}
+
+.popularArticles .post header {
+    margin-bottom: 0px!important;
+}
+
+.popularArticles header h1{
+    font-size: 48px;
+    line-height: 48px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 56px;
+}
+
+.pagination .buttons {
+    cursor: pointer;
+    color:black;
+    width: 98px;
+    vertical-align: middle;
+    text-align: center;
+    height: 47px;
+    border: 1px solid black;
+}
