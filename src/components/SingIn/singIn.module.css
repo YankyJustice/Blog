@@ -1,0 +1,50 @@
+.singInContainer {
+    height: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.singInContainer .singInBlock {
+    width: 410px;
+}
+
+.singInContainer .singInBlock .header {
+    text-align: center;
+    font-size: 36px;
+    line-height: 56px;
+    margin-bottom: 48px;
+}
+
+.singInContainer .singInBlock .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.singInContainer .singInBlock .form input {
+    height: 47px;
+    margin-bottom: 32px;
+    font-size: 22px;
+}
+
+.singInContainer .singInBlock .form input:focus {
+    outline: none;
+}
+
+
+.singInContainer .singInBlock .form span {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.singInContainer .singInBlock .form button {
+background-color: black;
+    color: white;
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+    cursor: pointer;
+}

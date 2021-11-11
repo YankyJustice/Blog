@@ -1,0 +1,50 @@
+.loginContainer {
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.loginContainer .loginBlock {
+    width: 396px;
+}
+
+.loginContainer .loginBlock .header {
+    text-align: center;
+    font-size: 36px;
+    line-height: 56px;
+    margin-bottom: 48px;
+}
+
+.loginContainer .loginBlock .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginContainer .loginBlock .form input {
+    height: 47px;
+    margin-bottom: 32px;
+    font-size: 22px;
+}
+
+.loginContainer .loginBlock .form input:focus {
+    outline: none;
+}
+
+
+.loginContainer .loginBlock .form span {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.loginContainer .loginBlock .form button {
+background-color: black;
+    color: white;
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+    cursor: pointer;
+}

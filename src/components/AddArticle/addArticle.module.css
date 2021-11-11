@@ -1,0 +1,61 @@
+.container {
+    height: calc(100vh - 95px - 240px);
+}
+.icons {
+    margin-top: 91px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.icons img {
+    margin-left:10px;
+    cursor: pointer;
+}
+
+.header {
+    margin-top: 80px;
+}
+
+.header span {
+    font-size: 56px;
+    line-height: 56px;
+    color: #242424;
+}
+
+.container .form {
+    margin-top: 42px;
+}
+
+.container .form input{
+    padding-left: 16px;
+    border: 1px solid #E1E1E1;
+    height: 48px;
+    width: 100%;
+    outline: none;
+    margin-bottom: 24px;
+}
+
+.container .form .buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.container .form .publish {
+    cursor: pointer;
+    border: none;
+    background: #242424;
+    color: #FFFFFF;
+    padding: 16px 32px;
+}
+
+.container .form .uploadPhoto {
+    cursor: pointer;
+    border: none;
+    background: #FFFFFF;
+    color: #242424;
+    padding: 16px 32px;
+    border: 1px solid #242424;
+    font-size: 14px;
+}

@@ -6,14 +6,14 @@ const isAuth = true
 
 export const Header = () => {
 	return (
-		<header>
+		<header className={style.header}>
 			<div className={style.logo}>
 				<img src={logo} alt='logo'/>
 			</div>
 			<nav>
 				{isAuth ? <div className={style.authBlock}>
 						<div className={style.nav}>
-							<NavLink to='allArticles' activeClassName={style.Active}>All articles</NavLink>
+							<NavLink to='main' activeClassName={style.Active}>All articles</NavLink>
 							<NavLink to='myArticles' activeClassName={style.Active}>My articles</NavLink>
 							<NavLink to='addArticle' activeClassName={style.Active}>Add article</NavLink>
 							<NavLink to='profile' activeClassName={style.Active}>Profile</NavLink>

@@ -1,4 +1,4 @@
-header {
+.header {
     height: 95px;
     display: flex;
     flex-direction: row;
@@ -66,5 +66,5 @@ header a {
 
 a.Active {
     color:black;
-    background-color: black;
+    border-bottom: 1px solid black;
 }
