@@ -1,22 +1,34 @@
 import style from './addArticle.module.css'
-import underline from './../../Assets/Underline.png'
-import group60 from './../../Assets/Group 60.png'
-import group61 from './../../Assets/Group 61.png'
-import group62 from './../../Assets/Group 62.png'
-import group63 from './../../Assets/Group 63.png'
-import group64 from './../../Assets/Group 64.png'
-import group65 from './../../Assets/Group 65.png'
-import group66 from './../../Assets/Group 66.png'
-import group67 from './../../Assets/Group 67.png'
-import s from './../../Assets/S.png'
-import x2lower from './../../Assets/X-2.png'
-import x2upper from './../../Assets/X2.png'
-import staples from './../../Assets/{}.png'
-import B from './../../Assets/B.png'
-import I from './../../Assets/I.png'
+import underline from '../../assets/Underline.png'
+import group60 from '../../assets/Group 60.png'
+import group61 from '../../assets/Group 61.png'
+import group62 from '../../assets/Group 62.png'
+import group63 from '../../assets/Group 63.png'
+import group64 from '../../assets/Group 64.png'
+import group65 from '../../assets/Group 65.png'
+import group66 from '../../assets/Group 66.png'
+import group67 from '../../assets/Group 67.png'
+import s from '../../assets/S.png'
+import x2lower from '../../assets/X-2.png'
+import x2upper from '../../assets/X2.png'
+import staples from '../../assets/{}.png'
+import B from '../../assets/B.png'
+import I from '../../assets/I.png'
 import {Field, Form, Formik} from "formik";
+import {useContext} from "react";
+import {authContext} from "../../context/context";
+import {useProfile} from "../../hooks/useProfile";
+import {addArticle} from "../../services";
+
 
 export const AddArticle = () => {
+
+	const userData = useContext(authContext)
+
+	const profile = useProfile(userData)
+
+
+
 	return <div className={style.container}>
 	<div className={style.header}>
 		<span>Add article</span>
@@ -42,8 +54,8 @@ export const AddArticle = () => {
 			<img src={group67}/>
 			</div>
 		</div>
-		<Formik initialValues={{login: '',password: ''}}
-		        onSubmit={()=>alert('s')}>
+		<Formik initialValues={{title: '',category: ''}}
+		        onSubmit={(value)=>addArticle(value, profile)}>
 			<Form className={style.form}>
 				<Field id="title" name="title" placeholder="Enter a title"/>
 				<Field id="category" name="category" placeholder="Enter the category name..."/>

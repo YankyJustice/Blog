@@ -1,37 +1,62 @@
 import style from './profile.module.css'
-import photo from './../../Assets/post1.jpg'
+import photo from '../../assets/post1.jpg'
 import {Field, Form, Formik} from "formik";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {authContext} from "../../context/context";
+import {useProfile} from "../../hooks/useProfile";
 
 export const Profile = () => {
-	return<div className={style.container}>
-	<div className={style.header}><span>Profile</span></div>
-		<div className={style.profile}>
-			<div className={style.photoProfile}>
-				<img src={photo}/>
-				<div className={style.changePhoto}>Change photo</div>
-				<span className={style.deletePhoto}>Delete photo</span>
+
+	const userData = useContext(authContext)
+
+	const profile = useProfile(userData)
+
+
+	const changeProfile = (value) => {
+		const users = JSON.parse(localStorage.getItem('users'))
+		users.forEach((el, index) => {
+			if (el.email === userData) {
+				users[index].description = value.description
+				users[index].firstName = value.firstName
+				users[index].lastName = value.lastName
+				localStorage.setItem('users', JSON.stringify(users))
+			}
+		})
+	}
+
+	return (
+		<div className={style.container}>
+			<div className={style.header}><span>Profile</span></div>
+			<div className={style.profile}>
+				<div className={style.photoProfile}>
+					<img src={photo}/>
+					<div className={style.changePhoto}>Change photo</div>
+					<span className={style.deletePhoto}>Delete photo</span>
+				</div>
+				<Formik
+					enableReinitialize={true}
+					initialValues={profile}
+					onSubmit={(values) => changeProfile(values)}
+				>
+					<Form className={style.form}>
+						<div className={style.formData}>
+							<div className={style.firstName}>
+								<span>First name</span>
+								<Field id="firstName" name="firstName"/>
+							</div>
+							<div className={style.lastName}>
+								<span>Last name</span>
+								<Field id="lastName" name="lastName"/>
+							</div>
+						</div>
+						<div className={style.description}>
+							<div>Description</div>
+							<Field id="description" name="description" as='textarea'/>
+						</div>
+						<button type="submit">Save changes</button>
+					</Form>
+				</Formik>
 			</div>
-			<Formik initialValues={{login: '',password: ''}}
-			        onSubmit={(values)=>console.log(values.description)}>
-				<Form className={style.form}>
-					<div className={style.formData}>
-						<div className={style.firstName}>
-						<span>First name</span>
-						<Field id="firstName" name="firstName" />
-						</div>
-						<div className={style.lastName}>
-							<span>Last name</span>
-							<Field id="lastName" name="lastName" />
-						</div>
-					</div>
-					<div className={style.description}>
-					<div>Description</div>
-					<Field id="description" name="description" as='textarea' />
-					</div>
-					<button type="submit">Save changes</button>
-				</Form>
-			</Formik>
 		</div>
-	</div>
+	)
 }

@@ -45,7 +45,7 @@
     padding-bottom: 38px;
     display: flex;
     flex-direction: row;
-    column-gap: 24px;
+    column-gap: 10px;
     align-items: center;
     color:#8C8C8C;
 }
@@ -113,4 +113,9 @@
     text-align: center;
     height: 47px;
     border: 1px solid black;
+}
+
+.emptyArticles {
+    text-align: center;
+    padding-top: 30px;
 }

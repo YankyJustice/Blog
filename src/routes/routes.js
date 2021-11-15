@@ -4,6 +4,7 @@ import {Login} from "../components/Login";
 import {SingIn} from "../components/SingIn";
 import {Profile} from "../components/Profile";
 import {AddArticle} from "../components/AddArticle";
+import {Article} from "../components/Article";
 
 
 export const PublicRoutes = [
@@ -46,7 +47,7 @@ export const PrivateRoutes = [
     },
     {
         path:'/article:id',
-        component:AddArticle,
+        component:Article,
         exact: true,
     },
 ]

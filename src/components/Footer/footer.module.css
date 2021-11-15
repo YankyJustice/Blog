@@ -29,6 +29,11 @@
     column-gap: 24px;
     align-items: center;
 }
+.noAuthBlock {
+    display: flex;
+    column-gap: 24px;
+    align-items: center;
+}
 
 .noAuthBlock a{
     color: white;

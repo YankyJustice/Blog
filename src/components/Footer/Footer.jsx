@@ -1,16 +1,15 @@
 import style from './footer.module.css'
 import {NavLink} from "react-router-dom";
-import Logo from './../../Assets/LogoFooter.png'
+import Logo from '../../assets/LogoFooter.png'
 
-const auth = true
 
-export const Footer = () =>{
+export const Footer = ({userData, logout}) =>{
     return(
       <footer className={style.footer}>
         <div className={style.wrapper}>
       <div className={style.topFooter}>
         <div className={style.logo}><img src={Logo}/></div>
-        {auth?
+        {userData?
           <div className={style.authBlock}>
             <div className={style.nav}>
               <NavLink to='main'>All articles</NavLink>
@@ -18,12 +17,12 @@ export const Footer = () =>{
               <NavLink to='addArticle'>Add article</NavLink>
               <NavLink to='profile'>Profile</NavLink>
             </div>
-            <div className={style.logout}><span>Logout</span></div>
+            <div onClick={logout} className={style.logout}><span>Logout</span></div>
           </div>
           :
           <div className={style.noAuthBlock}>
           <div className={style.login}><NavLink to='/login'>Log in</NavLink></div>
-          <div className={style.singIn}><NavLink to='/singin'>Sing in</NavLink></div>
+          <div className={style.singIn}><NavLink to='/singin'>Sing Up</NavLink></div>
         </div>}
       </div>
       <div className={style.bottomFooter}>
