@@ -94,3 +94,10 @@
     resize: none;
     height: 155px;
 }
+
+.messageSuccess{
+    margin-top: 10px;
+    color:green;
+    font-size: 20px;
+    text-align: center;
+}

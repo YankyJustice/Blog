@@ -4,3 +4,31 @@
   padding-right: 15px;
   margin: 0 auto;
 }
+.rdw-image-modal {
+  border: 1px solid black!important;
+}
+.rdw-image-modal input {
+  border: 1px solid black!important;
+}
+.rdw-embedded-modal {
+  border: 1px solid black!important;
+  width: fit-content!important;
+  height: fit-content!important;
+}
+.rdw-embedded-modal input {
+  border: 1px solid black!important;
+}
+.rdw-link-modal {
+  border: 1px solid black!important;
+  width: fit-content!important;
+  height: fit-content!important;
+}
+
+.rdw-link-modal input {
+  border: 1px solid black!important;
+}
+
+.rdw-colorpicker-modal {
+  border: 1px solid black!important;
+  width: fit-content!important;
+}

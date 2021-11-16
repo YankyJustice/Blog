@@ -1,4 +1,3 @@
-
 export const email = (value)=>{
 	const regEXP = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	let error
@@ -20,8 +19,6 @@ export const lastName = (value) => {
 	if (value && !regEXP.test(value)) {
 	 error = 'Only english'
 	}
-
-
 
 	return error
 }

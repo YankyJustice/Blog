@@ -1,5 +1,6 @@
 main {
     margin-bottom: 110px;
+    min-height: 900px;
 }
 
 .topPost {
@@ -22,13 +23,13 @@ main {
     width: 464px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-left: 24px;
     padding-top: 8px;
+    height: 380px;
 }
 
 .footer {
-    padding-bottom: 38px;
+    margin-top: auto;
     display: flex;
     flex-direction: row;
     column-gap: 10px;
@@ -46,17 +47,26 @@ main {
     font-size: 16px;
     line-height: 26px;
     color: #8C8C8C;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
 .topContent header h2 {
     font-size: 32px;
     line-height: 40px;
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tag {
     color: #8C8C8C;
     font-size: 12px;
     line-height: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 35px;
 }
 
 .footer .eye {
@@ -71,17 +81,12 @@ main {
     column-gap: 10px;
 }
 
-.footer .eyeCenter {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    top: 40%;
-    right: 11px;
-}
-
 .footer .eyeContainer {
     width: 24px;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
 }
 .post {
     display: flex;
@@ -94,6 +99,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 680px;
+    height: 250px;
 }
 
 .post .image img {
@@ -110,20 +116,23 @@ main {
     row-gap: 40px;
 }
 
+
 .post .text {
     font-size: 16px;
-    color: #8C8C8C;
-    height: 72px;
+    color: black;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+
 }
 
-.post footer {
-    padding-bottom: 0px!important;
-    margin-top: 25px;
+.post .footer {
+    margin-top: auto;
 }
 
-.post .header h2{
-display: inline-block;
-    overflow: hidden; /* Обрезаем содержимое */
+.post .header a h2{
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 32px;

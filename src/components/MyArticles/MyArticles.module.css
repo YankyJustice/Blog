@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 40% 60%;
     margin-top: 80px;
+    min-height: 900px;
 }
 
 .profile {
@@ -10,9 +11,8 @@
     align-items: center;
     height: 366px;
     padding: 68px;
+    text-align: center;
 }
-
-
 
 .profile img {
     border-radius: 50%;
@@ -68,23 +68,22 @@
     column-gap: 10px;
 }
 
-.footer .eyeCenter {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    top: 40%;
-    right: 11px;
-}
 
 .footer .eyeContainer {
     width: 24px;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
 }
 .post .text {
     font-size: 16px;
-    color: #8C8C8C;
+    color: black;
     line-height: 24px;
-    margin-bottom: 20px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .post .tag {
@@ -93,11 +92,16 @@
     color: #8C8C8C;
     margin-top: 32px;
     padding-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 35px;
 }
 .post h2 {
     font-size: 32px;
     line-height: 32px;
     color: #242424;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .pagination {
     display: flex;

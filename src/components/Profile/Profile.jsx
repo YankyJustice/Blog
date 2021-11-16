@@ -1,16 +1,22 @@
+import {Field, Form, Formik} from 'formik';
+import {useContext, useEffect, useState} from 'react';
+
+import {useProfile} from '../../hooks/useProfile';
+import {authContext} from '../../context/context';
+
 import style from './profile.module.css'
 import photo from '../../assets/post1.jpg'
-import {Field, Form, Formik} from "formik";
-import {useContext, useEffect, useState} from "react";
-import {authContext} from "../../context/context";
-import {useProfile} from "../../hooks/useProfile";
 
 export const Profile = () => {
 
-	const userData = useContext(authContext)
+	const [messageSuccess, setMessageSuccess] = useState('')
 
+	const userData = useContext(authContext)
 	const profile = useProfile(userData)
 
+	useEffect(() => {
+		return () => setMessageSuccess('')
+	}, [])
 
 	const changeProfile = (value) => {
 		const users = JSON.parse(localStorage.getItem('users'))
@@ -20,13 +26,16 @@ export const Profile = () => {
 				users[index].firstName = value.firstName
 				users[index].lastName = value.lastName
 				localStorage.setItem('users', JSON.stringify(users))
+				setMessageSuccess('Profile updated')
 			}
 		})
 	}
 
 	return (
 		<div className={style.container}>
-			<div className={style.header}><span>Profile</span></div>
+			<div className={style.header}>
+				<span>Profile</span>
+			</div>
 			<div className={style.profile}>
 				<div className={style.photoProfile}>
 					<img src={photo}/>
@@ -42,21 +51,25 @@ export const Profile = () => {
 						<div className={style.formData}>
 							<div className={style.firstName}>
 								<span>First name</span>
-								<Field id="firstName" name="firstName"/>
+								<Field id='firstName' name='firstName'/>
 							</div>
 							<div className={style.lastName}>
 								<span>Last name</span>
-								<Field id="lastName" name="lastName"/>
+								<Field id='lastName' name='lastName'/>
 							</div>
 						</div>
 						<div className={style.description}>
 							<div>Description</div>
-							<Field id="description" name="description" as='textarea'/>
+							<Field id='description'
+							       name='description'
+							       as='textarea'
+							/>
 						</div>
-						<button type="submit">Save changes</button>
+						<button type='submit'>Save changes</button>
 					</Form>
 				</Formik>
 			</div>
+			<div className={style.messageSuccess}>{messageSuccess}</div>
 		</div>
 	)
 }

@@ -1,5 +1,7 @@
 .container {
-    height: 700px;
+    min-height: 1000px;
+    padding-bottom: 30px;
+
 }
 .icons {
     margin-top: 91px;
@@ -27,7 +29,7 @@
     margin-top: 42px;
 }
 
-.container .form input{
+.container .form .input{
     padding-left: 16px;
     border: 1px solid #E1E1E1;
     height: 48px;
@@ -58,4 +60,22 @@
     padding: 16px 32px;
     border: 1px solid #242424;
     font-size: 14px;
+}
+
+.textEditor {
+    padding: 20px;
+    border: 1px solid #E1E1E1;
+    margin-bottom: 10px;
+    padding-bottom: 50px;
+    width: 100%;
+}
+
+.textEditor span {
+    word-wrap: break-word;
+}
+
+.messageSuccess {
+    margin-top: 10px;
+    color:green;
+    font-size: 20px;
 }
