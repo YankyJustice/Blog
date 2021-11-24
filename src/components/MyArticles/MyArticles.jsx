@@ -1,59 +1,53 @@
-import style from './MyArticles.module.css'
-import profilePhoto from '../../assets/post1.jpg'
-import eyeImg from '../../assets/eye.png';
 import {useContext, useEffect, useState} from 'react';
-import {authContext} from '../../context/context';
-import {useProfile} from '../../hooks/useProfile';
 import {NavLink} from 'react-router-dom';
 import draftToHtml from 'draftjs-to-html';
+import {NumberParam, useQueryParam} from "use-query-params";
+
+import {Preloader} from "../../Preloader";
+import {authContext} from '../../context/context';
+import {articlesAPI} from "../../api/api";
+
+import style from './MyArticles.module.css'
+import defaultPhoto from '../../assets/post1.jpg'
+import eyeImg from '../../assets/eye.png';
 
 export const MyArticles = () => {
-	const [myArticles, setMyArticles] = useState([])
-	const [allArticles, setAllArticles] = useState([])
 	const [articles, setArticles] = useState([])
-	const [page, setPage] = useState(1)
+	const [maxPage, setMaxPage] = useState()
+	const [queryPage, setQueryPage] = useQueryParam('page', NumberParam)
+	const [isFetching, setIsFetching] = useState(true)
 
-	const userData = useContext(authContext)
-	const profile = useProfile(userData)
+	const profile = useContext(authContext)
+	const profilePhoto = profile.photo ? 'http://localhost:4000/' + profile.photo : defaultPhoto
 
-	useEffect(() => {
-		const end = page * 6
-		const start = end - 6
-		setArticles(myArticles.slice(start, end))
-	}, [myArticles, page])
+	useEffect(async () => {
+		const currentPage = queryPage || 1
+		const response = await articlesAPI.getMyArticles(currentPage, profile.email)
+		setArticles(response.items)
+		setQueryPage(currentPage)
+		setMaxPage(Math.ceil(response.countArticles / 6))
+		setIsFetching(false)
+	}, [])
 
-	useEffect(() => {
-		let articles = JSON.parse(localStorage.getItem('articles'))
-		setAllArticles(articles)
-		setMyArticles(articles
-			.filter((el) => el.email === profile.email)
-			.sort((a, b) => b.id - a.id))
-	}, [profile])
-
-	const nextPage = () => {
-		if (page < myArticles.length / 6) {
-			setPage(page + 1)
+	const nextPage = async () => {
+		if (queryPage + 1 <= maxPage) {
+			const response = await articlesAPI.getMyArticles(queryPage + 1, profile.email)
+			setArticles(response.items)
+			setQueryPage(queryPage + 1)
+		}
+	}
+	const prevPage = async () => {
+		if (queryPage - 1 > 0) {
+			const response = await articlesAPI.getMyArticles(queryPage - 1, profile.email)
+			setArticles(response.items)
+			setQueryPage(queryPage - 1)
 		}
 	}
 
-	const addView = (id) => {
-		const articles = allArticles.map(el => {
-			if (id === el.id) {
-				el.views += 1
-				console.log(el)
-				return el
-			}
-			return el
-		})
-		localStorage.setItem('articles', JSON.stringify(articles))
-	}
 
-	const prevPage = () => {
-		if (page > 1) {
-			setPage(page - 1)
-		}
+	if (isFetching) {
+		return <Preloader/>
 	}
-
 
 	return <main className={style.myArticles}>
 		<div className={style.profile}>
@@ -75,13 +69,13 @@ export const MyArticles = () => {
 				{articles.map(article => {
 					return <div className={style.post}>
 						<div className={style.postPhoto}>
-							<img src={profilePhoto}/>
+							<img src={'http://localhost:4000/' + article.image}/>
 						</div>
 						<div className={style.tag}>
 							<span>#{article.category}</span>
 						</div>
 						<header className={style.header}>
-							<NavLink onClick={() => addView(article.id)} to={`article${article.id}`}>
+							<NavLink onClick={() => console.log(1)} to={`article${article.id}`}>
 								<h2>{article.title}</h2>
 							</NavLink>
 						</header>
@@ -92,7 +86,7 @@ export const MyArticles = () => {
 						<footer className={style.footer}>
 							<img src={profilePhoto} className={style.photoSmall}/>
 							<span className={style.author}>
-							{`${article.authorFirstName}  ${article.authorLastName}`}
+							{`${article.user.firstName}  ${article.user.lastName}`}
 						</span>
 							<span className={style.data}>{article.date.replace('T', ' ').slice(0, -8)}</span>
 							<span className={style.views}>

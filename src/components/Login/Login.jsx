@@ -1,7 +1,8 @@
 import {Field, Form, Formik} from 'formik'
-import {useContext, useState} from 'react';
+import {useContext, useState} from 'react'
 
-import {loginFuncContext} from '../../context/context';
+import {setUserContext} from '../../context/context'
+import {authAPI} from '../../api/api'
 
 import style from './login.module.css'
 
@@ -9,7 +10,18 @@ export const Login = () => {
 
 	const [message, setMessage] = useState('')
 
-	const login = useContext(loginFuncContext)
+	const setUserData = useContext(setUserContext)
+
+	const login = (values) => {
+		authAPI.login(values)
+			.then(res => {
+				if (res.responseCode === 1) {
+					localStorage.setItem('token', JSON.stringify(res.token))
+				}
+				setMessage(res.message)
+			})
+			.then(() => authAPI.auth().then(res => setUserData(res)))
+	}
 
 	return <div className={style.loginContainer}>
 		<div className={style.loginBlock}>
@@ -17,7 +29,7 @@ export const Login = () => {
 				<span>Log in to your account</span>
 			</header>
 			<Formik initialValues={{email: '', password: ''}}
-			        onSubmit={(value) => login(value, setMessage)}
+			        onSubmit={(values) => login(values)}
 			>
 				<Form className={style.form}>
 					<span>Email Address</span>

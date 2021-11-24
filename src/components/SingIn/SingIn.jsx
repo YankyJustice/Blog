@@ -1,24 +1,39 @@
 import {Field, Form, Formik} from 'formik'
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react'
 
-import {Registration} from '../../services';
-import {email, firstName, lastName, password, passwords} from '../../services/validators';
-import {loginFuncContext} from '../../context/context';
+import {email, firstName, lastName, password, passwords} from '../../services/validators'
+import {authAPI} from '../../api/api'
+import {setUserContext} from '../../context/context'
 
 import style from './singIn.module.css'
 
 export const SingIn = () => {
 	const [message, setMessage] = useState('')
 
-	const login = useContext(loginFuncContext)
+	const setUser = useContext(setUserContext)
 
 	useEffect(() => {
 		return () => setMessage('')
 	}, [])
 
-	const auth = (value) => {
-		const userData = Registration(value, setMessage)
-		login(userData)
+	const auth = (values) => {
+		authAPI.singUp(values).then(res => {
+				if (res.responseCode === 1) {
+					authAPI.login(
+						{
+							email: values.email,
+							password: values.password
+						}
+					)
+						.then(res => {
+								localStorage.setItem('token', JSON.stringify(res.token))
+								authAPI.auth()
+									.then(userData => setUser(userData))
+							}
+						)
+				}
+			}
+		)
 	}
 
 
@@ -29,7 +44,7 @@ export const SingIn = () => {
 			</header>
 			<Formik initialValues={{firstName: '', lastName: '', email: '', password: ''}}
 			        validate={passwords}
-			        onSubmit={(value) => auth(value)}
+			        onSubmit={(values) => auth(values)}
 			>
 				{
 					({

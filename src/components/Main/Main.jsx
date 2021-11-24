@@ -1,65 +1,63 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink, Route} from 'react-router-dom';
 import {useContext, useEffect, useState} from 'react';
 import draftToHtml from 'draftjs-to-html';
+import {NumberParam, useQueryParam} from 'use-query-params';
 
 import {authContext} from '../../context/context';
+import {Preloader} from '../../Preloader';
 
 import style from './main.module.css'
-import imgPost from '../../assets/post1.jpg'
+import defaultPhoto from '../../assets/post1.jpg'
 import eyeImg from '../../assets/eye.png'
+import {articlesAPI} from '../../api/api';
 
 export const Main = () => {
-	const [allArticles, setAllArticles] = useState([])
 	const [articles, setArticles] = useState([])
-	const [page, setPage] = useState(1)
-	const [popularArticle, setPopularArticle] = useState({})
-
+	const [popularArticle, setPopularArticle] = useState({user: {firstName: '', lastName: ''}})
+	const [maxPage, setMaxPage] = useState()
+	const [queryPage, setQueryPage] = useQueryParam('page', NumberParam)
+	const [isFetching, setIsFetching] = useState(true)
 	const auth = useContext(authContext)
 
-	useEffect(() => {
-		const end = page * 6
-		const start = end - 6
-		setArticles(allArticles.slice(start, end))
-	}, [allArticles, page])
-
-	const nextPage = () => {
-		if (page < allArticles.length / 6) {
-			setPage(page + 1)
-		}
-	}
-
-	const prevPage = () => {
-		if (page > 1) {
-			setPage(page - 1)
-		}
-	}
-
-	const addView = (id) => {
-		const articles = allArticles.map(el => {
-			if (id === el.id) {
-				el.views += 1
-				console.log(el)
-				return el
-			}
-			return el
-		})
-		localStorage.setItem('articles', JSON.stringify(articles))
-	}
-
-	useEffect(() => {
-		const articles = JSON.parse(localStorage.getItem('articles'))
-		if (articles && articles.length) {
-			setAllArticles(articles.sort((a, b) => b.views - a.views))
-			setPopularArticle(articles.sort((a, b) => b.views - a.views)[0])
-		}
+	useEffect(async () => {
+		const currentPage = queryPage || 1
+		const response = await articlesAPI.getAllArticles(currentPage)
+		const article = await articlesAPI.getPopularArticle()
+		setPopularArticle(article)
+		setArticles(response.items)
+		setQueryPage(currentPage)
+		setMaxPage(Math.ceil(response.countArticles / 6))
+		setIsFetching(false)
 	}, [])
+
+
+	const Next = async () => {
+		if (queryPage + 1 <= maxPage) {
+			const response = await articlesAPI.getAllArticles(queryPage + 1)
+			setArticles(response.items)
+			setQueryPage(queryPage + 1)
+		}
+	}
+	const Prev = async () => {
+		if (queryPage - 1 > 0) {
+			const response = await articlesAPI.getAllArticles(queryPage - 1)
+			setArticles(response.items)
+			setQueryPage(queryPage - 1)
+		}
+	}
+
+	const popularArticlePhoto = popularArticle.user.photo ? 'http://localhost:4000/' + popularArticle.user.photo : defaultPhoto
+
+	if (isFetching) {
+		return <Preloader/>
+	}
 
 	return (
 		<main>
-			<article className={style.topPost}>
+			{popularArticle ? <article className={style.topPost}>
 				<div className={style.postBlock}>
 					<div className={style.image}>
-						<img src={imgPost}/>
+						<img src={'http://localhost:4000/' + popularArticle.image}/>
 					</div>
 				</div>
 				<div className={style.topContent}>
@@ -69,7 +67,7 @@ export const Main = () => {
 					<header className={style.header}>
 						{auth
 							?
-							(<NavLink onClick={() => addView(popularArticle.id)}
+							(<NavLink onClick={() => articlesAPI.addView(popularArticle.id)}
 							          to={`article${popularArticle.id}`}
 							>
 								<h2>{popularArticle.title}</h2>
@@ -81,9 +79,9 @@ export const Main = () => {
 					         dangerouslySetInnerHTML={{__html: draftToHtml(popularArticle.text)}}
 					/>
 					<footer className={style.footer}>
-						<img src={imgPost} className={style.photoSmall}/>
+						<img src={popularArticlePhoto} className={style.photoSmall}/>
 						<span className={style.author}>
-                {`${popularArticle.authorFirstName} ${popularArticle.authorLastName}`}
+                {`${popularArticle.user.firstName} ${popularArticle.user.lastName}`}
             </span>
 						<span className={style.data}>
                 {popularArticle.date
@@ -100,23 +98,23 @@ export const Main = () => {
             </span>
 					</footer>
 				</div>
-			</article>
+			</article> : ''}
 			<section className={style.popularArticles}>
 				<header>
 					<h1>Popular articles</h1>
 				</header>
 				<div className={style.popularArticlesMap}>
-					{articles.map(article => {
+					{articles.length > 0 ? articles.map(article => {
 						return <article className={style.post}>
 							<div className={style.postBlock}>
 								<div className={style.image}>
-									<img src={imgPost}/>
+									<img src={'http://localhost:4000/' + article.image}/>
 								</div>
 							</div>
 							<div className={style.content}>
 								<div className={style.tag}>#{article.category}</div>
 								<header className={style.header}>
-									<NavLink onClick={() => addView(article.id)}
+									<NavLink onClick={() => articlesAPI.addView(article.id)}
 									         to={`article${article.id}`}>
 										<h2>{article.title}</h2>
 									</NavLink>
@@ -124,9 +122,10 @@ export const Main = () => {
 								<article className={style.text}
 								         dangerouslySetInnerHTML={{__html: draftToHtml(article.text)}}/>
 								<footer className={style.footer}>
-									<img src={imgPost} className={style.photoSmall}/>
+									<img src={article.user.photo ? 'http://localhost:4000/' + article.user.photo : defaultPhoto}
+									     className={style.photoSmall}/>
 									<span className={style.author}>
-                        {`${article.authorFirstName}  ${article.authorLastName}`}
+                        {`${article.user.firstName}  ${article.user.lastName}`}
                     </span>
 									<span className={style.data}>
                         {article.date.replace('T', ' ').slice(0, -8)}
@@ -140,13 +139,13 @@ export const Main = () => {
 								</footer>
 							</div>
 						</article>
-					})}
+					}) : <div>No articles</div>}
 				</div>
 				<div className={style.pagination}>
-					<div className={style.buttons} onClick={prevPage}>
+					<div className={style.buttons} onClick={Prev}>
 						<p>Prev</p>
 					</div>
-					<div className={style.buttons} onClick={nextPage}>
+					<div className={style.buttons} onClick={Next}>
 						<p>Next</p>
 					</div>
 				</div>

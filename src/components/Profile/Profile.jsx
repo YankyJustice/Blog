@@ -1,34 +1,51 @@
-import {Field, Form, Formik} from 'formik';
-import {useContext, useEffect, useState} from 'react';
+import {Field, Form, Formik} from 'formik'
+import {useContext, useEffect, useState} from 'react'
 
-import {useProfile} from '../../hooks/useProfile';
-import {authContext} from '../../context/context';
+import {authContext, setUserContext} from '../../context/context'
+import {ModalWindow} from "../ModalWindow"
+import {profileApi} from "../../api/api"
 
 import style from './profile.module.css'
-import photo from '../../assets/post1.jpg'
+import defaultPhoto from '../../assets/post1.jpg'
 
 export const Profile = () => {
 
 	const [messageSuccess, setMessageSuccess] = useState('')
+	const [modal, setModal] = useState(false)
+	const [image, setImage] = useState()
 
-	const userData = useContext(authContext)
-	const profile = useProfile(userData)
+	const profile = useContext(authContext)
+	const setProfile = useContext(setUserContext)
 
 	useEffect(() => {
 		return () => setMessageSuccess('')
 	}, [])
 
-	const changeProfile = (value) => {
-		const users = JSON.parse(localStorage.getItem('users'))
-		users.forEach((el, index) => {
-			if (el.email === userData) {
-				users[index].description = value.description
-				users[index].firstName = value.firstName
-				users[index].lastName = value.lastName
-				localStorage.setItem('users', JSON.stringify(users))
-				setMessageSuccess('Profile updated')
+	useEffect(async () => {
+		if (image) {
+			const formData = new FormData()
+			formData.append('image', image)
+			formData.append('email', profile.email)
+			const response = await profileApi.updPhoto(formData)
+			if (response) {
+				setProfile({...profile, photo: response})
 			}
-		})
+		}
+	}, [image])
+
+	const deletePhoto = async ()=>{
+		const response = await profileApi.deletePhoto(profile.email)
+		if (response.message){
+			setProfile({...profile, photo:''})
+		}
+	}
+
+	const updateProfile = async (values)=>{
+		const profile = await profileApi.updateProfile(values)
+		if (profile){
+			setProfile(profile)
+			setMessageSuccess('Profile updated')
+		}
 	}
 
 	return (
@@ -37,15 +54,22 @@ export const Profile = () => {
 				<span>Profile</span>
 			</div>
 			<div className={style.profile}>
-				<div className={style.photoProfile}>
-					<img src={photo}/>
-					<div className={style.changePhoto}>Change photo</div>
-					<span className={style.deletePhoto}>Delete photo</span>
-				</div>
+				{profile.photo
+					?	<div className={style.photoProfile}>
+
+						<img src={'http://localhost:4000/' + profile.photo}/>
+					<div className={style.changePhoto} onClick={() => setModal(true)}>Change photo</div>
+					<span className={style.deletePhoto} onClick={deletePhoto}>Delete photo</span>
+
+				</div>:
+					<div className={style.photoProfile}>
+					<img src={defaultPhoto}/>
+					<div className={style.changePhoto} onClick={() => setModal(true)}>Update photo</div>
+					</div>}
 				<Formik
 					enableReinitialize={true}
 					initialValues={profile}
-					onSubmit={(values) => changeProfile(values)}
+					onSubmit={(values) => updateProfile(values)}
 				>
 					<Form className={style.form}>
 						<div className={style.formData}>
@@ -70,6 +94,10 @@ export const Profile = () => {
 				</Formik>
 			</div>
 			<div className={style.messageSuccess}>{messageSuccess}</div>
+			<ModalWindow modal={modal}
+			             setModal={setModal}
+			             title='Update photo profile'
+			             setImage={setImage}/>
 		</div>
 	)
 }

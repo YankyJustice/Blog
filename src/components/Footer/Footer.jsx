@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom'
 
 import style from './footer.module.css'
 import Logo from '../../assets/LogoFooter.png'
