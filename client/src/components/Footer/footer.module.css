@@ -1,0 +1,87 @@
+.footer {
+    height: 240px;
+    background-color: #242424;
+
+}
+.topFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    border-bottom:1px solid grey;
+
+}
+
+.footer .wrapper {
+    width: 1100px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    height: 100%;
+}
+
+
+.authBlock {
+    display: flex;
+    column-gap: 24px;
+    align-items: center;
+}
+.noAuthBlock {
+    display: flex;
+    column-gap: 24px;
+    align-items: center;
+}
+
+.noAuthBlock a{
+    color: white;
+    text-decoration: none;
+}
+
+.noAuthBlock .login {
+    padding: 15px 32px 13px 32px;
+}
+
+.noAuthBlock .singIn {
+    padding: 15px 32px 13px 32px;
+    border: 1px solid white;
+}
+
+.logo img{
+    width: 100%;
+    border-radius: 0px;
+}
+
+.footer .wrapper .bottomFooter {
+    color:white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.authBlock {
+    display: flex;
+    flex-direction: row;
+    column-gap: 64px;
+    align-items: center;
+}
+.nav a {
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
+
+.authBlock .logout{
+    color:white;
+    cursor: pointer;
+    padding: 15px 32px 13px 32px;
+    border: 1px solid white;
+}
+

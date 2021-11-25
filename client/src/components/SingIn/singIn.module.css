@@ -1,0 +1,81 @@
+.singInContainer {
+    height: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.singInContainer .singInBlock {
+    width: 410px;
+}
+
+.singInContainer .singInBlock .header {
+    text-align: center;
+    font-size: 36px;
+    line-height: 56px;
+    margin-bottom: 48px;
+}
+
+.singInContainer .singInBlock .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.singInContainer input {
+    width: 100%;
+    height: 47px;
+
+    font-size: 22px;
+}
+
+.singInContainer .singInBlock .form input:focus {
+    outline: none;
+}
+
+
+.singInContainer .singInBlock .form .description {
+    margin-top: 32px;
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.singInContainer .singInBlock .form button {
+    margin-top: 32px;
+background-color: black;
+    color: white;
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.fieldBlock {
+    height: 53px;
+    position: relative;
+    width: 100%;
+}
+.tooltip {
+    top:49%;
+    transform: translate(0,-50%);
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-radius: 5px;
+    background-color: red;
+    position: absolute;
+    left: 105%;
+    width: 200px;
+}
+
+.error {
+    color:red;
+    text-align: center;
+    margin-top: 10px;
+}

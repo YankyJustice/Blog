@@ -1,0 +1,70 @@
+.header {
+    height: 95px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.noAuthBlock {
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+}
+header a {
+    text-decoration: none;
+}
+
+.login {
+    padding: 15px 32px 13px 32px;
+    border: solid 1px black;
+}
+
+.singIn {
+    padding: 15px 32px 13px 32px;
+    background-color: black;
+    border: solid 1px black;
+}
+
+.login a {
+    color:black;
+}
+
+.singIn a {
+    color:white;
+}
+
+.logout {
+    padding: 15px 32px 13px 32px;
+    background-color: black;
+}
+
+.logout {
+    cursor: pointer;
+    color:white;
+}
+
+.authBlock {
+    display: flex;
+    flex-direction: row;
+    column-gap: 64px;
+    align-items: center;
+}
+.authBlock a {
+    color: #8C8C8C;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
+
+a.Active {
+    color:black;
+    border-bottom: 1px solid black;
+}

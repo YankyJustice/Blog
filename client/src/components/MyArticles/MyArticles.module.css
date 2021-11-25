@@ -1,0 +1,126 @@
+.myArticles {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-top: 80px;
+    min-height: 900px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 366px;
+    padding: 68px;
+    text-align: center;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 126px;
+    height: 126px;
+
+}
+.profile .profileDescription {
+    text-align: center;
+    color: #8C8C8C;
+    font-size: 14px;
+}
+.profile .profileName {
+    margin-top: 20px;
+}
+.profile .profileName span {
+    font-weight: 700;
+    font-size: 24px;
+    color: #242424;
+}
+
+.posts .post .postPhoto img{
+    width: 664px;
+    height: 395px;
+}
+.posts .post {
+    margin-bottom: 80px;
+}
+.footer {
+    padding-bottom: 38px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+    color:#8C8C8C;
+}
+
+.footer .photoSmall {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.footer .eye {
+    width: 20px;
+    height: 14px;
+    vertical-align: middle;
+}
+.footer .views {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+
+.footer .eyeContainer {
+    width: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+}
+.post .text {
+    font-size: 16px;
+    color: black;
+    line-height: 24px;
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.post .tag {
+    font-size: 12px;
+    line-height: 12px;
+    color: #8C8C8C;
+    margin-top: 32px;
+    padding-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 35px;
+}
+.post h2 {
+    margin-top:0px!important;
+    font-size: 32px;
+    line-height: 32px;
+    color: #242424;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pagination .buttons {
+    cursor: pointer;
+    color:black;
+    width: 98px;
+    vertical-align: middle;
+    text-align: center;
+    height: 47px;
+    border: 1px solid black;
+}
+
+.emptyArticles {
+    text-align: center;
+    padding-top: 30px;
+}

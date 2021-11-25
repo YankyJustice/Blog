@@ -1,0 +1,182 @@
+main {
+    margin-bottom: 110px;
+    min-height: 900px;
+}
+
+.topPost {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.topPost .image img {
+    max-width: 582px;
+    height: 397px;
+}
+.topPost .image {
+    max-width: 582px;
+    float: left
+}
+
+.topContent {
+    width: 464px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 24px;
+    padding-top: 8px;
+    height: 380px;
+}
+
+.footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+    color:#8C8C8C;
+}
+
+.footer .photoSmall {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.topPost .text {
+    font-size: 16px;
+    line-height: 26px;
+    color: #8C8C8C;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+.topContent header h2 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tag {
+    color: #8C8C8C;
+    font-size: 12px;
+    line-height: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 35px;
+}
+
+.footer .eye {
+    width: 20px;
+    height: 14px;
+    vertical-align: middle;
+}
+.footer .views {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.footer .eyeContainer {
+    width: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+}
+.post {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    flex-wrap: wrap;
+}
+
+.post .content {
+    display: flex;
+    flex-direction: column;
+    width: 680px;
+    height: 250px;
+}
+
+.post .image img {
+    max-width: 367px;
+    height: 260px;
+}
+.post .image {
+    max-width: 367px;
+}
+
+.popularArticlesMap {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+}
+
+
+.post .text {
+    font-size: 16px;
+    color: black;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+
+}
+
+.post .footer {
+    margin-top: auto;
+}
+
+.post .header a h2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 700;
+
+}
+
+.header a{
+    color:black;
+}
+.post a {
+    color:black!important;
+}
+.popularArticles {
+    margin-top: 91px;
+}
+
+.popularArticles header {
+    margin-bottom: 56px;
+}
+
+.popularArticles .post header {
+    margin-bottom: 0px!important;
+}
+
+.popularArticles header h1{
+    font-size: 48px;
+    line-height: 48px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 56px;
+}
+
+.pagination .buttons {
+    cursor: pointer;
+    color:black;
+    width: 98px;
+    vertical-align: middle;
+    text-align: center;
+    height: 47px;
+    border: 1px solid black;
+}
